@@ -3,7 +3,11 @@
   connection: local
   vars_file:
   - course.yaml
+
+  
   tasks:
    - name: print variables
-      ansible.builtin.debug:
-      msg: " course is: {{ COURSE }}, duretion is: {{ DURETION }} "
+     vars:
+      COURSE: ansible
+     ansible.builtin.debug:
+       msg: " course is: {{ COURSE }}, duretion is: {{ DURETION }} "
