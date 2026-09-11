@@ -2,15 +2,15 @@
   hosts: local
   connection: local
   vars_prompt:
-  - name: user name
+   - name: user name
      prompt: please enter your name
      private: false
 
-  - name: user passwod
+   - name: user passwod
      prompt: please enter your password
      private: true
 
   tasks:
-   - name: print info
-     ansible.builtin.debug:
-      msg: "user name is: {{ username }}, user password is: {{ password }}"
+  - name: print info
+      ansible.builtin.debug:
+       msg: "user name is: {{ username }}, user password is: {{ password }}"
