@@ -2,7 +2,7 @@
   hosts: catalogue
   become: yes
   tasks:
-  - name: enable nodejs 20 version
+  - name: enable version
     ansibe.builtin.command: dnf module enable nodejs:20 -y
 
   - name: installing nodejs
@@ -33,4 +33,3 @@
      src: /tmp/catalogue.zip
      dest: /app
 
-     
