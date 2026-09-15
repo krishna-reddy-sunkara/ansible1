@@ -28,16 +28,29 @@
     ansible.builtin.debug:
      msg: "{{ ec2_output }}"  
 
+  
   - name: update the record
     amazon.aws.route53:
       state: present
       zone: "{{ domain_name }}"
-      record: "{{ item.item }}-{{ env }}.{{ domain_name }}"
+      record: "{{ item.item }}-{{ env }}.{{ domain_name }}" # mongodb.daws-92s.store
       type: A
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
       wait: true   
     loop: "{{ ec2_output.results }}" 
+
+- name: update the record
+  amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "robosho-{{ env }}.{{ domain_name }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].public_ip_address }}" # roboshop.daws-92s.store
+      wait: true   
+  loop: "{{ ec2_output.results }}" 
+  when: item.item == "frontend"
 
 
 
