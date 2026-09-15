@@ -19,5 +19,5 @@
       Project: roboshop
       Pomponent: "{{ item }}"
       Env: "{{ env }}"
-      Name: "{{ name }}"
+      Name: "{{ item }}-{{ env }}"
     loop: "{{ instances }}" 
