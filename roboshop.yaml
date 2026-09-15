@@ -4,6 +4,7 @@
   vars:
     sg_id: sg-0027bf26309cfab1a
     ami_id: ami-0220d79f3f480ecf5
+    domain_name: daws-92s.store
     env: dev
     instances:
     - mongodb
@@ -26,6 +27,17 @@
   - name: print the outut
     ansible.builtin.debug:
      msg: "{{ ec2_output }}"  
+
+  - name: update the route53 record
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "{{ item.item }}-{{ env }}.{{ domain_name }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].private_ip_addresses }}"
+      wait: true   
+    loop: "{{ ec2_output.result }}" 
 
 
 
