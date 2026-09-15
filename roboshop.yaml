@@ -6,7 +6,7 @@
     ami_id: ami-0220d79f3f480ecf5
     domain_name: daws-92s.store
     env: dev
-    action: create
+  #  action: create
     instances:
     - mongodb
     - catalogue
@@ -24,12 +24,12 @@
       Name: "{{ item }}-{{ env }}"
     loop: "{{ instances }}" 
     register: ec2_output
-    when: action == "create"
+    #when: action == "create"
 
   - name: print the outut
     ansible.builtin.debug:
      msg: "{{ ec2_output }}"  
-     when: action == "create" 
+    # when: action == "create" 
 
   
   - name: update the record
@@ -42,7 +42,7 @@
       value: "{{ item.instances[0].private_ip_address }}"
       wait: true   
     loop: "{{ ec2_output.results }}" 
-    when: action == "create"
+  #  when: action == "create"
 
   - name: update the record
     amazon.aws.route53:
@@ -56,7 +56,7 @@
     loop: "{{ ec2_output.results }}" 
     when:
     - item.item == "frontend"
-    - action == "create"
+    #- action == "create"
 
 
 
