@@ -1,0 +1,24 @@
+- name: create and update instances and route53 records
+  hosts: all
+  connections: local
+  vars:
+    sg_id: sg-0027bf26309cfab1a
+    ami_id: ami-0220d79f3f480ecf5
+    env: dev
+    instances:
+    - mongodb
+    - catalogue
+  tasks:
+  - name: ec2 instance creations
+    amazon.aws.ec2_instance:
+     name: instance creation
+     instance_type: "t3.micro"
+     security_group: "{{ sg_id }}"
+     image_id: "{{ ami_id }}"
+     Name: "{{ item }}-{{ dev }}"
+     tags:
+      Project: roboshop
+      Pomponent: "{{ item }}"
+      Env: "{{ env }}"
+      Name: "{{ name }}"
+    loop: "{{ instances }}" 
