@@ -15,7 +15,7 @@
      instance_type: "t3.micro"
      security_group: "{{ sg_id }}"
      image_id: "{{ ami_id }}"
-     Name: "{{ item }}-{{ dev }}"
+     Name: "{{ item }}-{{ env }}"
      tags:
       Project: roboshop
       Pomponent: "{{ item }}"
