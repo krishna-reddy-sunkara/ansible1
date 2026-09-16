@@ -2,7 +2,7 @@
   hosts: all
   connection: local
   vars:
-    sg_id: sg-0027bf26309cfab1a
+    sg_id: sg-0027bf26309cfab1a 
     ami_id: ami-0220d79f3f480ecf5
     domain_name: daws-92s.store
     env: dev
@@ -17,6 +17,7 @@
      security_group: "{{ sg_id }}"
      image_id: "{{ ami_id }}"
      name: "{{ item }}-{{ env }}"
+     wait: false
      tags:
       Project: roboshop
       Pomponent: "{{ item }}"
@@ -52,7 +53,9 @@
      type: A
      ttl: 1
      value: "{{ item.instances[0].public_ip_address }}" # roboshop.daws-92s.store
-     wait: false
+     wait: true
+     overwrite: true
+
     loop: "{{ ec2_output.results }}" 
     when: # and
      - item.item == "frontend"
