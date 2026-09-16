@@ -69,5 +69,5 @@
     ansible.builtin.service:
      name: catalogue
      stare: present
-     enabled: true   
+     enabled: yes   
 
