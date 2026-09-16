@@ -8,7 +8,7 @@
   - name: install redis
     ansible.builtin.dnf:
      name: nodejs
-     state: present
+     state: started
 
   - name: allowing remote connections   
     ansible.builtin.replace:  
@@ -25,6 +25,6 @@
   - name: start and enabled redis
     ansible.builtin.service:
      name: redis
-     state: started
+     state: restarted
      enabled: yes     
 
