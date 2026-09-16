@@ -54,7 +54,7 @@
      dest: /etc/systemd/system/cart.service
 
   - name: deamon reload
-    ansible.builtin.systems_reload:
+    ansible.builtin.systems_service:
      daemon_reload: true  
 
   - name: start the cart service
