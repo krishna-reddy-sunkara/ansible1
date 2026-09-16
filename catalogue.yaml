@@ -31,6 +31,7 @@
   - name: delete catalogue
     ansible.builtin.get_url:
      path: /tmp/catalogue.zip
+     url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
      state: absent     
 
   - name: download catalogue
