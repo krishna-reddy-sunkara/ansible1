@@ -9,7 +9,7 @@
     loop:
     - python3 
     - gcc 
-    - python3-devel -y
+    - python3-devel 
 
   - name: creating system user
     ansible.builtin.user: 
