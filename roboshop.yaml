@@ -88,9 +88,9 @@
    sg_id: sg-0027bf26309cfab1a 
    ami_id: ami-0220d79f3f480ecf5
    domain_name: daws-92s.store
-    env: dev
-    action: create
-    instances:
+   env: dev
+  action: create
+  instances:
     - mongodb
     - catalogue
   tasks:
