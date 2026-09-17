@@ -89,8 +89,8 @@
    ami_id: ami-0220d79f3f480ecf5
    domain_name: daws-92s.store
    env: dev
-  action: create
-  instances:
+   action: create
+   instances:
     - mongodb
     - catalogue
   tasks:
