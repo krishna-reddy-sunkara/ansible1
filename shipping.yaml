@@ -4,8 +4,11 @@
   tasks:
   - name: installing maven
     ansible.builtin.dnf:
-     name: install maven
+     name: "{{ item }}"
      state: present
+    loop:
+    - maven
+    - mysql  
 
   - name: creating system user
     ansible.builtin.user: 
@@ -56,10 +59,10 @@
      src: shipping.service
      dest: /etc/systemd/system/shipping.service  
 
-  - name: install mysql package
-    ansible.builtin.dnf:
-     name: mysql
-     state: present
+  # - name: install mysql package
+  #   ansible.builtin.dnf:
+  #    name: mysql
+  #    state: present
 
   - name: deamon reload
     ansible.builtin.systemd_service:
