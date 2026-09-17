@@ -78,4 +78,4 @@
      name: "{{ item }}-{{ env }}"
      
     loop: "{{ instances }}"
-    when: action == "destroyi" 
+    when: action == "destroy" 
