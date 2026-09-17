@@ -59,14 +59,14 @@
      src: shipping.service
      dest: /etc/systemd/system/shipping.service  
 
-  # - name: install mysql package
-  #   ansible.builtin.dnf:
-  #    name: mysql
-  #    state: present
-
   - name: deamon reload
     ansible.builtin.systemd_service:
      daemon_reload: true
+
+  - name: install dependences
+    ansible.builtin.pip:
+     name: PyMySQL
+     executable: pip3.9   
 
   - name: import shipping data
     community.mysql.mysql_db:
