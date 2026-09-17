@@ -1,0 +1,13 @@
+- name: frontend configuration
+  hosts: frontend
+  become: yes
+  tasks: 
+  - name: enable nginx:1.24 -y
+    ansible.builtin.command: dnf module enable nginx:1.24 -y
+
+  - name: install nginx
+    ansible.builtin.dnf:
+     name: install nginx   
+     state: present
+
+     
