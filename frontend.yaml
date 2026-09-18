@@ -37,7 +37,7 @@
      state: absent
 
   - name: Copy nginx.conf file
-    ansible.builtin.file:
+    ansible.builtin.template:
      src: nginx.conf
      path: /etc/nginx/nginx.conf
 
@@ -46,6 +46,6 @@
      name: nginx
      state: restarted
      enabled: yes
-        
+
 
       
