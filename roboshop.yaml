@@ -1,3 +1,85 @@
+
+# - name: create and update instances and route53 records
+#   hosts: all
+#   connection: local
+#   vars:
+#     sg_id: sg-0027bf26309cfab1a
+#     ami_id: ami-0220d79f3f480ecf5
+#     domain_name: daws-92s.store
+#     env: dev
+#     action: create
+#     # Do not define instances here – pass from CLI
+
+#   tasks: # create
+#   - name: ec2 instance creation
+#     amazon.aws.ec2_instance:
+#       instance_type: "t3.micro"
+#       security_group: "{{ sg_id }}"
+#       image_id: "{{ ami_id }}"
+#       name: "{{ item }}-{{ env }}"
+#       tags:
+#         Project: roboshop
+#         Component: "{{ item }}"
+#         Env: "{{ env }}"
+#         Name: "{{ item }}-{{ env }}"
+#     loop: "{{ instances }}"
+#     register: ec2_output
+#     when: action == "create"
+
+#   - name: print the output
+#     ansible.builtin.debug:
+#       msg: "{{ ec2_output }}"
+#     when: action == "create"
+
+#   - name: update the record
+#     amazon.aws.route53:
+#       state: present
+#       zone: "{{ domain_name }}"
+#       record: "{{ item.item }}-{{ env }}.{{ domain_name }}" # e.g. shipping.daws-92s.store
+#       type: A
+#       ttl: 1
+#       value: "{{ item.instances[0].private_ip_address }}"
+#       overwrite: true
+#     loop: "{{ ec2_output.results }}"
+#     when: action == "create"
+
+#   - name: update the record for frontend
+#     amazon.aws.route53:
+#       state: present
+#       zone: "{{ domain_name }}"
+#       record: "roboshop-{{ env }}.{{ domain_name }}"
+#       type: A
+#       ttl: 1
+#       value: "{{ item.instances[0].public_ip_address }}" # roboshop.daws-92s.store
+#       wait: false
+#       overwrite: true
+#     loop: "{{ ec2_output.results }}"
+#     when:
+#       - item.item == "frontend"
+#       - action == "create"
+
+#   - name: delete r53 record
+#     amazon.aws.route53:
+#       state: absent
+#       zone: "{{ domain_name }}"
+#       record: "{{ item }}-{{ env }}.{{ domain_name }}"
+#       type: A
+#       ttl: 1
+#       wait: false
+#     loop: "{{ instances }}"
+#     when: action == "destroy"
+
+#   - name: ec2 instance deletion
+#     amazon.aws.ec2_instance:
+#       state: absent
+#       name: "{{ item }}-{{ env }}"
+#       wait: false
+#     loop: "{{ instances }}"
+#     when: action == "destroy"
+
+
+
+
 - name: create and update instances and route53 records
   hosts: all
   connection: local
