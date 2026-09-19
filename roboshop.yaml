@@ -78,7 +78,7 @@
 #     when: action == "destroy"
 
 
-
+##########################
 
 - name: create and update instances and route53 records
   hosts: all
